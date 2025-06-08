@@ -12,7 +12,7 @@ docker-compose.override.yml
 .gitignore
 
 # Credentials, local data
-creds.json
+# creds.json
 *.log
 celerybeat-schedule
 
