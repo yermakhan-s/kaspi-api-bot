@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  celery-worker:
+    build: .
+    container_name: kaspi_celery_worker
+    network_mode: host
+    env_file: .env
+    volumes:
+      - ./:/app
+      - ./creds.json:/app/creds.json:ro
+    restart: unless-stopped
+
+  celery-beat:
+    build: .
+    container_name: kaspi_celery_beat
+    network_mode: host
+    command: python -m celery -A app.tasks beat --loglevel=info
+    env_file: .env
+    volumes:
+      - ./:/app
+      - ./creds.json:/app/creds.json:ro
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: kaspi_redis
+    command: ["redis-server", "--appendonly", "yes"]
+    ports: ["6379:6379"]
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+volumes:
+  redis-data:

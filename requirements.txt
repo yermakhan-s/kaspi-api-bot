@@ -1,0 +1,10 @@
+celery==5.3.6
+redis==5.0.4
+requests==2.32.2
+pydantic==1.10.15
+gspread==6.1.0
+google-auth==2.30.0
+google-auth-oauthlib==1.2.0
+google-auth-httplib2==0.2.0
+python-dotenv==1.0.1        # ← NEW
+watchdog[watchmedo]==4.0.0      # CLI-утилита watchmedo
